@@ -22,7 +22,7 @@ def score(X_train,X_test,y_train,y_test,model):
     Affichage des metrics
     """
     return {'accuracy' :        round(float(metrics.precision_score(y_test,model.predict(X_test))),2),
-                   'auc' :      round(float(metrics.roc_auc_score(y_test,model.predict(X_test))*2-1),2),
+                   'auc' :      round(float(metrics.roc_auc_score(y_test,model.predict(X_test))),2),
                    'Gauc' :      round(float(metrics.roc_auc_score(y_test,model.predict_proba(X_test)[:,1], average='weighted')*2-1),2),
                    'f1-score' : round(float(metrics.f1_score(y_test,model.predict(X_test))),2)}
 
@@ -78,15 +78,15 @@ def randint_exc(liste, exception):
 def repartition(df,i,interest):
     """
     Permet de savoir les modalitées à regrouper
-    Puis calcule la répartition de chaques modalitées dépendamment de la variable expliquée
+    Puis calcule la répartition de chaques modalitées dépendamment de la variable expliquée pour la regle de decision
     """
     a_reg = []
     for m in df[i].unique():
-        if sum(df[i] == m)/len(df[i]) <   0.05:
-            a_reg.append(m)
-    cache = pd.crosstab(df[i], df[interest[0]])[interest[1]]
+        if sum(df[i] == m)/len(df[i]) <   0.05: # Si la modalité est inférieur au seuil
+            a_reg.append(m) #On la met dans notre liste de modalités à regrouper
+    cache = pd.crosstab(df[i], df[interest[0]])[interest[1]]# On calcule la répartition de chaques modalités dépendamment de la variable expliquée
     for ii in cache.index:
-        cache[ii] = round(cache[ii] / sum(df[i] == ii), 3)
+        cache[ii] = round(cache[ii] / sum(df[i] == ii), 3) # On divise par son nombre pour avoir une proportion et pr pouvoir comparer
     return cache,a_reg
 
 
@@ -104,7 +104,7 @@ def regroupement(df, sup, interest):
             reg = {}
             for sav in a_reg:
                 val = cache[sav]
-                savsav = randint_exc(df[i].unique(),sav)
+                savsav = randint_exc(df[i].unique(),sav) #Ici on choisi une modalité au hasard pour initialiser le minimum (on exlu la modalité analysée)
                 for m in cache.index:
                     if abs(val - cache[m]) < abs(val - cache[savsav]) and sav!=m: #ici regle de décision
                         savsav = m
@@ -130,7 +130,7 @@ def clean_df(df,too_much):
     return df.replace('?', np.nan).dropna().reset_index(drop=True).drop(too_much, axis=1)
 
 
-def process_datacleaning(df,dico,sup_var):
+def process_datacleaning(df,dico):
     """
     permet de faire le regroupement de variables en une fonction et en répétant le replace au cas ou
     """
