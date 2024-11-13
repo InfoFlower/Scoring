@@ -1,9 +1,4 @@
 Itération numéro 1
-     marital-status
-          Widowed : Married-spouse-absent 
-          Separated : Never-married 
-          Married-spouse-absent : Widowed 
-          Married-AF-spouse : Married-civ-spouse 
      occupation
           Farming-fishing : Machine-op-inspct 
           Protective-serv : Armed-Forces 
@@ -11,14 +6,22 @@ Itération numéro 1
           Priv-house-serv : Other-service 
           Handlers-cleaners : Other-service 
           Armed-Forces : Protective-serv 
-     relationship
-          Wife : Husband 
-          Other-relative : Own-child 
-     gender
 Itération numéro 2
-     marital-status
-          Widowed : Divorced 
      occupation
           Protective-serv : Sales 
-     relationship
-     gender
+Itération numéro 3
+     occupation
+Itération numéro 4
+     occupation
+Itération numéro 5
+     occupation
+Itération numéro 6
+     occupation
+Itération numéro 7
+     occupation
+Itération numéro 8
+     occupation
+Itération numéro 9
+     occupation
+Itération numéro 10
+     occupation

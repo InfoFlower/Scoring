@@ -2,7 +2,7 @@
 ############ Modules importés
 ################################################################################################################################################
 
-
+from sklearn.tree import plot_tree
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -23,7 +23,7 @@ def score(X_train,X_test,y_train,y_test,model):
     """
     return {'accuracy' :        round(float(metrics.precision_score(y_test,model.predict(X_test))),2),
                    'auc' :      round(float(metrics.roc_auc_score(y_test,model.predict(X_test))),2),
-                   'Gauc' :      round(float(metrics.roc_auc_score(y_test,model.predict_proba(X_test)[:,1], average='weighted')*2-1),2),
+                   'Gauc' :      round(float(metrics.roc_auc_score(y_test,model.predict_proba(X_test)[:,1], average='weighted')),2),
                    'f1-score' : round(float(metrics.f1_score(y_test,model.predict(X_test))),2)}
 
 def score_cv(X_train,X_test,y_train,y_test,trained_model):
@@ -37,7 +37,8 @@ def all_calc(df,
              test_size=0.33,
              rnd_state=11,
              new_data=None,
-             cols=['workclass', 'education', 'marital-status', 'occupation','relationship', 'race', 'gender','native-country', 'income']):
+             cols=['workclass', 'education', 'marital-status', 'occupation','relationship', 'race', 'gender','native-country', 'income'],
+             plot=False):
     """
     Segmente le jeu de données en train test size si besoin
     puis peut faire les predictions ou les scores dépendamment du besoin
@@ -59,6 +60,8 @@ def all_calc(df,
                 ret[i[1]]=score(X_train,X_test,y_train,y_test,i[0])
         if new_data is not None:
             ret[i[1]]=[i[0].predict(pd.get_dummies(new_data,columns=cols[:-1])),i[1]]
+        if plot == True and i[1]=='Arbre de décision':
+            plot_tree(i[0])
     return ret
 
 ################################################################################################################################################

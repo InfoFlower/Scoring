@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>scoring.ipynb</title>
+  <title>Traitement & Scoring.py</title>
   <style>
     html {
       line-height: 1.5;
@@ -192,34 +192,34 @@
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
     code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #00a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #00a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #00a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #00a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #00a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <!--[if lt IE 9]>
@@ -234,7 +234,7 @@ id="PU4sJfesNkm3">
 <div class="cell markdown" id="I60-DznM-dxY">
 <p>Si on arrive à ces performances on est satisfait :</p>
 </div>
-<div class="cell code" data-execution_count="220"
+<div class="cell code" data-execution_count="138"
 data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
 data-executionInfo="{&quot;elapsed&quot;:9668,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1726560177731,&quot;user&quot;:{&quot;displayName&quot;:&quot;Gabriel Lebovic&quot;,&quot;userId&quot;:&quot;18238104211780784135&quot;},&quot;user_tz&quot;:-120}"
 id="jUuskx4E9xj5" data-outputId="2b34bc06-0703-475e-bf7d-1b49b2932cd9">
@@ -254,19 +254,11 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 id="jOmeXQDhNrUH">
 <h1>Import des données et exploration</h1>
 </section>
-<div class="cell code" data-execution_count="278"
+<div class="cell code" data-execution_count="139"
 data-executionInfo="{&quot;elapsed&quot;:12,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1726560177732,&quot;user&quot;:{&quot;displayName&quot;:&quot;Gabriel Lebovic&quot;,&quot;userId&quot;:&quot;18238104211780784135&quot;},&quot;user_tz&quot;:-120}"
 id="x_LPbmFd-GXz">
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;data/revenus.csv&#39;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>df.drop(<span class="st">&#39;fnlwgt&#39;</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.columns</span></code></pre></div>
-<div class="output execute_result" data-execution_count="278">
-<pre><code>Index([&#39;age&#39;, &#39;workclass&#39;, &#39;education&#39;, &#39;educational-num&#39;, &#39;marital-status&#39;,
-       &#39;occupation&#39;, &#39;relationship&#39;, &#39;race&#39;, &#39;gender&#39;, &#39;capital-gain&#39;,
-       &#39;capital-loss&#39;, &#39;hours-per-week&#39;, &#39;native-country&#39;, &#39;income&#39;],
-      dtype=&#39;object&#39;)</code></pre>
-</div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;data/revenus.csv&#39;</span>)</span></code></pre></div>
 </div>
 <section id="premier-cycle-" class="cell markdown">
 <h1>Premier cycle :</h1>
@@ -281,79 +273,22 @@ nomenclature des données</h2>
 <li>Présenter et interpréter les résultats des métriques de qualité</li>
 </ol>
 </div>
-<div class="cell code" data-execution_count="222">
+<div class="cell code" data-execution_count="160">
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.crosstab(df[<span class="st">&#39;gender&#39;</span>],df[<span class="st">&#39;relationship&#39;</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#4 données abbérantes</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>df.drop(df[df[<span class="st">&#39;relationship&#39;</span>]<span class="op">==</span><span class="st">&#39;Husband&#39;</span>][df[<span class="st">&#39;gender&#39;</span>]<span class="op">==</span><span class="st">&#39;Female&#39;</span>].index)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>df.drop(df[df[<span class="st">&#39;relationship&#39;</span>]<span class="op">==</span><span class="st">&#39;Wife&#39;</span>][df[<span class="st">&#39;gender&#39;</span>]<span class="op">==</span><span class="st">&#39;Male&#39;</span>].index)</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="162">
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.crosstab(df[<span class="st">&#39;gender&#39;</span>],df[<span class="st">&#39;relationship&#39;</span>])</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#4 données abbérantes</span></span></code></pre></div>
-<div class="output execute_result" data-execution_count="222">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>relationship</th>
-      <th>Husband</th>
-      <th>Not-in-family</th>
-      <th>Other-relative</th>
-      <th>Own-child</th>
-      <th>Unmarried</th>
-      <th>Wife</th>
-    </tr>
-    <tr>
-      <th>gender</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Female</th>
-      <td>1</td>
-      <td>5870</td>
-      <td>689</td>
-      <td>3376</td>
-      <td>3928</td>
-      <td>2328</td>
-    </tr>
-    <tr>
-      <th>Male</th>
-      <td>19715</td>
-      <td>6713</td>
-      <td>817</td>
-      <td>4205</td>
-      <td>1197</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="cell code">
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#traitement des données aberrantes</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>extr<span class="op">=</span><span class="st">&#39;&#39;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> df:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    extr<span class="op">+=</span><span class="ss">f&#39;</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>df[i]<span class="sc">.</span>unique()<span class="sc">}</span><span class="ss">&#39;</span><span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;output/vars_and_mods.txt&#39;</span>,<span class="st">&#39;w&#39;</span>) <span class="im">as</span> f :</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    f.write(extr)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Recherche dans chaques variables de modalités qui n&#39;irait pas dedans</span></span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#traitement des données aberrantes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>extr<span class="op">=</span><span class="st">&#39;&#39;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> df:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    extr<span class="op">+=</span><span class="ss">f&#39;</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>df[i]<span class="sc">.</span>unique()<span class="sc">}</span><span class="ss">&#39;</span><span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;output/vars_and_mods.txt&#39;</span>,<span class="st">&#39;w&#39;</span>) <span class="im">as</span> f :</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    f.write(extr)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Recherche dans chaques variables de modalités qui n&#39;irait pas dedans</span></span></code></pre></div>
 </div>
 <div class="cell markdown">
 <p>Pas de valeurs aberrantes</p>
@@ -364,43 +299,43 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 href="https://www.kaggle.com/code/chrisbss1/cramer-s-v-correlation-matrix"
 class="uri">https://www.kaggle.com/code/chrisbss1/cramer-s-v-correlation-matrix</a></p>
 </div>
-<div class="cell code" data-execution_count="224">
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_cramer<span class="op">=</span>pd.get_dummies(df)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cramers_V(var1,var2) :</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  crosstab <span class="op">=</span>np.array(pd.crosstab(var1,var2, rownames<span class="op">=</span><span class="va">None</span>, colnames<span class="op">=</span><span class="va">None</span>)) <span class="co"># Cross table building</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  stat <span class="op">=</span> chi2_contingency(crosstab)[<span class="dv">0</span>] <span class="co"># Keeping of the test statistic of the Chi2 test</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  obs <span class="op">=</span> np.<span class="bu">sum</span>(crosstab) <span class="co"># Number of observations</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  mini <span class="op">=</span> <span class="bu">min</span>(crosstab.shape)<span class="op">-</span><span class="dv">1</span> <span class="co"># Take the minimum value between the columns and the rows of the cross table</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> np.sqrt(stat<span class="op">/</span>(obs<span class="op">*</span>mini))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>rows<span class="op">=</span> []</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>{}</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> var1 <span class="kw">in</span> df_cramer:</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  cramers <span class="op">=</span>cramers_V(df_cramer[var1], df_cramer[<span class="st">&#39;income_&lt;=50K&#39;</span>]) <span class="co"># Cramer&#39;s V test</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  data[var1]<span class="op">=</span><span class="bu">float</span>(<span class="bu">round</span>(cramers,<span class="dv">2</span>)) <span class="co"># Keeping of the rounded value of the Cramer&#39;s V</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(data.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un DataFrame avec les valeurs triées</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>df_sorted <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>sorted_data, index<span class="op">=</span>[<span class="st">&#39;V de cramer&#39;</span>])</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Regrouper le résultat par variables</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>df_transposed <span class="op">=</span> df_sorted.T.reset_index()</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>df_transposed[<span class="st">&#39;split_index&#39;</span>] <span class="op">=</span> df_transposed[<span class="st">&#39;index&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.split(<span class="st">&#39;_&#39;</span>)[<span class="dv">0</span>])</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>grouped_df <span class="op">=</span> df_transposed.groupby(<span class="st">&#39;split_index&#39;</span>)[<span class="st">&#39;V de cramer&#39;</span>].<span class="bu">max</span>()</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>{}</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="bu">list</span>(grouped_df.index))):</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  data[<span class="bu">list</span>(grouped_df.index)[i]]<span class="op">=</span>grouped_df.values[i]</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(data.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>df_sorted <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>sorted_data, index<span class="op">=</span>[<span class="st">&#39;V de cramer&#39;</span>])</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher le heatmap</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df_sorted.T[<span class="dv">1</span>:], cmap<span class="op">=</span><span class="st">&#39;coolwarm&#39;</span>,annot<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
-<div class="output execute_result" data-execution_count="224">
+<div class="cell code" data-execution_count="163">
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_cramer<span class="op">=</span>pd.get_dummies(df)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cramers_V(var1,var2) :</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  crosstab <span class="op">=</span>np.array(pd.crosstab(var1,var2, rownames<span class="op">=</span><span class="va">None</span>, colnames<span class="op">=</span><span class="va">None</span>)) <span class="co"># Cross table building</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  stat <span class="op">=</span> chi2_contingency(crosstab)[<span class="dv">0</span>] <span class="co"># Keeping of the test statistic of the Chi2 test</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  obs <span class="op">=</span> np.<span class="bu">sum</span>(crosstab) <span class="co"># Number of observations</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  mini <span class="op">=</span> <span class="bu">min</span>(crosstab.shape)<span class="op">-</span><span class="dv">1</span> <span class="co"># Take the minimum value between the columns and the rows of the cross table</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> np.sqrt(stat<span class="op">/</span>(obs<span class="op">*</span>mini))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>rows<span class="op">=</span> []</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>{}</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> var1 <span class="kw">in</span> df_cramer:</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  cramers <span class="op">=</span>cramers_V(df_cramer[var1], df_cramer[<span class="st">&#39;income_&lt;=50K&#39;</span>]) <span class="co"># Cramer&#39;s V test</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  data[var1]<span class="op">=</span><span class="bu">float</span>(<span class="bu">round</span>(cramers,<span class="dv">2</span>)) <span class="co"># Keeping of the rounded value of the Cramer&#39;s V</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(data.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un DataFrame avec les valeurs triées</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>df_sorted <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>sorted_data, index<span class="op">=</span>[<span class="st">&#39;V de cramer&#39;</span>])</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Regrouper le résultat par variables</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>df_transposed <span class="op">=</span> df_sorted.T.reset_index()</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>df_transposed[<span class="st">&#39;split_index&#39;</span>] <span class="op">=</span> df_transposed[<span class="st">&#39;index&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.split(<span class="st">&#39;_&#39;</span>)[<span class="dv">0</span>])</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>grouped_df <span class="op">=</span> df_transposed.groupby(<span class="st">&#39;split_index&#39;</span>)[<span class="st">&#39;V de cramer&#39;</span>].<span class="bu">max</span>()</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>data<span class="op">=</span>{}</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="bu">list</span>(grouped_df.index))):</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  data[<span class="bu">list</span>(grouped_df.index)[i]]<span class="op">=</span>grouped_df.values[i]</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">sorted</span>(data.items(), key<span class="op">=</span><span class="kw">lambda</span> item: item[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>df_sorted <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>sorted_data, index<span class="op">=</span>[<span class="st">&#39;V de cramer&#39;</span>])</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher le heatmap</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df_sorted.T[<span class="dv">2</span>:], cmap<span class="op">=</span><span class="st">&#39;coolwarm&#39;</span>,annot<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="163">
 <pre><code>&lt;Axes: &gt;</code></pre>
 </div>
 <div class="output display_data">
@@ -409,32 +344,31 @@ src="images/9df0b713f67b8082be6ef484c2022578ec0be0e5.png" /></p>
 </div>
 </div>
 <div class="cell markdown">
-<p>On supprimera alors native-country, race, workclass et education lors
-d'un prochain traitement</p>
+<p>On supprimera alors fnlwgt après le premier entrainement. Il en est
+de même pour educational-num, il représente la même chose que
+education</p>
 </div>
-<div class="cell markdown">
-<p>On remarque que le status de marié est la plus corrélée avec le fait
-de gagner plus de 50K par mois. BLABLABLA</p>
-<h1 id="entraîner-les-modèles">Entraîner les modèles</h1>
+<section id="entraîner-les-modèles" class="cell markdown">
+<h1>Entraîner les modèles</h1>
+</section>
+<div class="cell code" data-execution_count="164">
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res_all<span class="op">=</span>sc.all_calc(df)</span></code></pre></div>
 </div>
-<div class="cell code" data-execution_count="225">
+<div class="cell code" data-execution_count="165">
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res_all<span class="op">=</span>sc.all_calc(df)</span></code></pre></div>
-</div>
-<div class="cell code" data-execution_count="226">
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sc.fancy_dico(res_all))</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sc.fancy_dico(res_all))</span></code></pre></div>
 <div class="output stream stdout">
 <pre><code>Arbre de décision
-     accuracy : 0.62 
+     accuracy : 0.6 
      auc : 0.74 
-     Gauc : 0.53 
+     Gauc : 0.74 
      f1-score : 0.61 
 Logistique
-     accuracy : 0.7 
-     auc : 0.71 
-     Gauc : 0.72 
-     f1-score : 0.58 
+     accuracy : 0.58 
+     auc : 0.62 
+     Gauc : 0.8 
+     f1-score : 0.41 
 
 </code></pre>
 </div>
@@ -447,33 +381,33 @@ id="1HuoVwWx8F5E">
 class="cell markdown">
 <h2>REGROUPEMENT ET SUPPRESSION DE VARIABLES</h2>
 </section>
-<div class="cell code" data-execution_count="280">
+<div class="cell code" data-execution_count="166">
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_regroup<span class="op">=</span>df.copy()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_regroup[<span class="st">&#39;native-country&#39;</span>]<span class="op">=</span>df_regroup[<span class="st">&#39;native-country&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="st">&#39;USA&#39;</span> <span class="cf">if</span> x<span class="op">==</span><span class="st">&#39;United-States&#39;</span> <span class="cf">else</span> <span class="st">&#39;OTHER&#39;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_regroup[<span class="st">&#39;capital-gain&#39;</span>]<span class="op">+=</span>df_regroup[<span class="st">&#39;capital-loss&#39;</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df_regroup<span class="op">=</span>df_regroup.drop(<span class="st">&#39;capital-loss&#39;</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sup_var<span class="op">=</span>[<span class="st">&#39;fnlwgt&#39;</span>,<span class="st">&#39;educational-num&#39;</span>,<span class="st">&#39;native-country&#39;</span>,<span class="st">&#39;race&#39;</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>calc_col<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> df.columns <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> [<span class="st">&#39;capital-loss&#39;</span>,<span class="st">&#39;capital-gain&#39;</span>,<span class="st">&#39;age&#39;</span>,<span class="st">&#39;educational-num&#39;</span>,<span class="st">&#39;income&#39;</span>,<span class="st">&#39;hours-per-week&#39;</span>] <span class="kw">and</span> i <span class="kw">not</span> <span class="kw">in</span> sup_var]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>calc_col.append(<span class="st">&#39;income&#39;</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>interest<span class="op">=</span>[<span class="st">&#39;income&#39;</span>,<span class="st">&#39;&gt;50K&#39;</span>]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>df_regroup<span class="op">=</span>sc.clean_df(df_regroup,sup_var)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>sup_reg<span class="op">=</span>[<span class="st">&#39;age&#39;</span>, <span class="st">&#39;workclass&#39;</span>, <span class="st">&#39;fnlwgt&#39;</span>, <span class="st">&#39;education&#39;</span>,<span class="st">&#39;marital-status&#39;</span>, <span class="st">&#39;relationship&#39;</span>, <span class="st">&#39;race&#39;</span>, <span class="st">&#39;gender&#39;</span>,<span class="st">&#39;capital-gain&#39;</span>, <span class="st">&#39;capital-loss&#39;</span>, <span class="st">&#39;hours-per-week&#39;</span>, <span class="st">&#39;native-country&#39;</span>,<span class="st">&#39;income&#39;</span>]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>dico_regroup<span class="op">=</span>[]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    dico_regroup.append(sc.regroupement(df_regroup,sup_reg,interest))</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    df_regroup<span class="op">=</span>sc.process_datacleaning(df_regroup,dico_regroup[<span class="bu">len</span>(dico_regroup)<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="167">
 <div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_regroup<span class="op">=</span>df.copy()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_regroup[<span class="st">&#39;native-country&#39;</span>]<span class="op">=</span>df_regroup[<span class="st">&#39;native-country&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="st">&#39;USA&#39;</span> <span class="cf">if</span> x<span class="op">==</span><span class="st">&#39;United-States&#39;</span> <span class="cf">else</span> <span class="st">&#39;OTHER&#39;</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_regroup[<span class="st">&#39;capital-gain&#39;</span>]<span class="op">+=</span>df_regroup[<span class="st">&#39;capital-loss&#39;</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df_regroup<span class="op">=</span>df_regroup.drop(<span class="st">&#39;capital-loss&#39;</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>sup_var<span class="op">=</span>[ <span class="st">&#39;educational-num&#39;</span>,<span class="st">&#39;native-country&#39;</span>, <span class="st">&#39;race&#39;</span>, <span class="st">&#39;workclass&#39;</span>, <span class="st">&#39;education&#39;</span>]</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>df_regroup<span class="op">=</span>sc.clean_df(df_regroup,sup_var)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>sup_reg<span class="op">=</span>[<span class="st">&#39;age&#39;</span>,<span class="st">&#39;fnlwgt&#39;</span>,<span class="st">&#39;capital-loss&#39;</span>,<span class="st">&#39;capital-gain&#39;</span>,<span class="st">&#39;hours-per-week&#39;</span>,<span class="st">&#39;income&#39;</span>]</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>calc_col<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> df_regroup.columns <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> sup_var <span class="kw">and</span> i<span class="op">!=</span> <span class="st">&#39;capital-gain&#39;</span> <span class="kw">and</span> i<span class="op">!=</span> <span class="st">&#39;age&#39;</span> <span class="kw">and</span> i <span class="kw">not</span> <span class="kw">in</span> sup_reg]</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>calc_col.append(<span class="st">&#39;income&#39;</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>interest<span class="op">=</span>[<span class="st">&#39;income&#39;</span>,<span class="st">&#39;&gt;50K&#39;</span>]</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>dico_regroup<span class="op">=</span>[]</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    dico_regroup.append(sc.regroupement(df_regroup,sup_reg,interest))</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    df_regroup<span class="op">=</span>sc.process_datacleaning(df_regroup,dico_regroup[<span class="bu">len</span>(dico_regroup)<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pour voir les regroupements faits par l&#39;algo</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;output/dico_regroup.txt&#39;</span>,<span class="st">&#39;w&#39;</span>) <span class="im">as</span> f :</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    f.write(sc.fancy_dico(dico_regroup))</span></code></pre></div>
 </div>
-<div class="cell code" data-execution_count="282">
+<div class="cell code" data-execution_count="168">
 <div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pour voir les regroupements faits par l&#39;algo</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;output/dico_regroup.txt&#39;</span>,<span class="st">&#39;w&#39;</span>) <span class="im">as</span> f :</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    f.write(sc.fancy_dico(dico_regroup))</span></code></pre></div>
-</div>
-<div class="cell code" data-execution_count="283">
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pour voir les regroupements faits</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sc.show_repartition(df_regroup)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pour voir les regroupements faits</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sc.show_repartition(df_regroup)</span></code></pre></div>
 <div class="output stream stdout">
 <pre><code>age
 </code></pre>
@@ -483,12 +417,28 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a h
 src="images/8f2290651eaef78def1b0f71d460f05690cde2c8.png" /></p>
 </div>
 <div class="output stream stdout">
+<pre><code>workclass
+</code></pre>
+</div>
+<div class="output display_data">
+<p><img
+src="images/3b24aa7039bbdcdc6b19b78f56bad9660a56ce06.png" /></p>
+</div>
+<div class="output stream stdout">
+<pre><code>education
+</code></pre>
+</div>
+<div class="output display_data">
+<p><img
+src="images/547446920a137f5ba94168cb5e3dc205163b6396.png" /></p>
+</div>
+<div class="output stream stdout">
 <pre><code>marital-status
 </code></pre>
 </div>
 <div class="output display_data">
 <p><img
-src="images/d8d365ed6df138f3dc5220cd8e89a10b356b7e09.png" /></p>
+src="images/029aafe9ae0cb61e1bafd8babe818650bb5eb5b5.png" /></p>
 </div>
 <div class="output stream stdout">
 <pre><code>occupation
@@ -504,7 +454,7 @@ src="images/9444949c8d94e51612e643eef23843d0167229cb.png" /></p>
 </div>
 <div class="output display_data">
 <p><img
-src="images/69a6d311acfbfac55a78f34d3f8e0291688127f7.png" /></p>
+src="images/a771c2c5214f4e1cde69ca55a0cd68b63ed98372.png" /></p>
 </div>
 <div class="output stream stdout">
 <pre><code>gender
@@ -543,44 +493,44 @@ src="images/eed137a6660422136ad3b72fd26bbece9eac3765.png" /></p>
 class="cell markdown">
 <h1>Comparaison des modèles, nette amélioration</h1>
 </section>
-<div class="cell code" data-execution_count="265">
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>res_reg<span class="op">=</span>sc.all_calc(df_regroup,cols<span class="op">=</span>calc_col)</span></code></pre></div>
-</div>
-<div class="cell code" data-execution_count="266">
+<div class="cell code" data-execution_count="169">
 <div class="sourceCode" id="cb23"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Résultats après regroupement et traitement</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sc.fancy_dico(res_reg))</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>res_reg<span class="op">=</span>sc.all_calc(df_regroup,cols<span class="op">=</span>calc_col)</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="170">
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Résultats après regroupement et traitement</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sc.fancy_dico(res_reg))</span></code></pre></div>
 <div class="output stream stdout">
 <pre><code>Arbre de décision
-     accuracy : 0.67 
+     accuracy : 0.65 
      auc : 0.75 
-     Gauc : 0.65 
+     Gauc : 0.78 
      f1-score : 0.63 
 Logistique
-     accuracy : 0.69 
-     auc : 0.74 
-     Gauc : 0.76 
-     f1-score : 0.62 
+     accuracy : 0.72 
+     auc : 0.75 
+     Gauc : 0.89 
+     f1-score : 0.65 
 
 </code></pre>
 </div>
 </div>
-<div class="cell code" data-execution_count="267">
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Résultats sans traitement</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sc.fancy_dico(res_all))</span></code></pre></div>
+<div class="cell code" data-execution_count="171">
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Résultats sans traitement</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sc.fancy_dico(res_all))</span></code></pre></div>
 <div class="output stream stdout">
 <pre><code>Arbre de décision
-     accuracy : 0.62 
+     accuracy : 0.6 
      auc : 0.74 
-     Gauc : 0.53 
+     Gauc : 0.74 
      f1-score : 0.61 
 Logistique
-     accuracy : 0.7 
-     auc : 0.71 
-     Gauc : 0.72 
-     f1-score : 0.58 
+     accuracy : 0.58 
+     auc : 0.62 
+     Gauc : 0.8 
+     f1-score : 0.41 
 
 </code></pre>
 </div>
@@ -588,79 +538,81 @@ Logistique
 <section id="hyperparametre-tuning" class="cell markdown">
 <h1>HYPERPARAMETRE TUNING</h1>
 </section>
-<div class="cell code" data-execution_count="268">
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>grid_tree <span class="op">=</span> {</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>],</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;min_samples_split&#39;</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>],</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;min_samples_leaf&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_features&#39;</span>: [<span class="va">None</span>, <span class="st">&#39;sqrt&#39;</span>, <span class="st">&#39;log2&#39;</span>]</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>grid_log<span class="op">=</span>{<span class="st">&#39;C&#39;</span>: [<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">10.0</span>, <span class="fl">100.0</span>],</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;solver&#39;</span>: [<span class="st">&#39;newton-cg&#39;</span>, <span class="st">&#39;lbfgs&#39;</span>, <span class="st">&#39;liblinear&#39;</span>, <span class="st">&#39;sag&#39;</span>, <span class="st">&#39;saga&#39;</span>],</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;penalty&#39;</span>: [<span class="st">&#39;l2&#39;</span>, <span class="st">&#39;l1&#39;</span>]</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>scoring<span class="op">=</span>[<span class="st">&#39;roc_auc&#39;</span>,<span class="st">&#39;f1&#39;</span>,<span class="st">&#39;accuracy&#39;</span>]</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>n_job<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>decision_tree<span class="op">=</span>GridSearchCV(DecisionTreeClassifier(),grid_tree,n_jobs<span class="op">=</span>n_job,scoring<span class="op">=</span>scoring,refit<span class="op">=</span><span class="st">&#39;f1&#39;</span>)</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>logit<span class="op">=</span>GridSearchCV(LogisticRegression(max_iter<span class="op">=</span><span class="dv">100</span>),grid_log,n_jobs<span class="op">=</span>n_job,scoring<span class="op">=</span>scoring,refit<span class="op">=</span><span class="st">&#39;f1&#39;</span>)</span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>models<span class="op">=</span>[(decision_tree,<span class="st">&#39;Arbre de décision&#39;</span>),(logit,<span class="st">&#39;Logistique&#39;</span>)]</span></code></pre></div>
-</div>
-<div class="cell code" data-execution_count="269">
+<div class="cell code" data-execution_count="172">
 <div class="sourceCode" id="cb28"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sav<span class="op">=</span>sc.all_calc(df_regroup,models,top_cv<span class="op">=</span><span class="va">True</span>,cols<span class="op">=</span>calc_col)</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>grid_tree <span class="op">=</span> {</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>],</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;min_samples_split&#39;</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>],</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;min_samples_leaf&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>],</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_features&#39;</span>: [<span class="va">None</span>, <span class="st">&#39;sqrt&#39;</span>, <span class="st">&#39;log2&#39;</span>]</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>grid_log<span class="op">=</span>{<span class="st">&#39;C&#39;</span>: [<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">10.0</span>, <span class="fl">100.0</span>],</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;solver&#39;</span>: [<span class="st">&#39;newton-cg&#39;</span>, <span class="st">&#39;lbfgs&#39;</span>, <span class="st">&#39;liblinear&#39;</span>, <span class="st">&#39;sag&#39;</span>, <span class="st">&#39;saga&#39;</span>],</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;penalty&#39;</span>: [<span class="st">&#39;l2&#39;</span>, <span class="st">&#39;l1&#39;</span>]</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>scoring<span class="op">=</span>[<span class="st">&#39;roc_auc&#39;</span>,<span class="st">&#39;f1&#39;</span>,<span class="st">&#39;accuracy&#39;</span>]</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>n_job<span class="op">=</span><span class="dv">4</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>decision_tree<span class="op">=</span>GridSearchCV(DecisionTreeClassifier(),grid_tree,n_jobs<span class="op">=</span>n_job,scoring<span class="op">=</span>scoring,refit<span class="op">=</span><span class="st">&#39;f1&#39;</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>logit<span class="op">=</span>GridSearchCV(LogisticRegression(max_iter<span class="op">=</span><span class="dv">100</span>),grid_log,n_jobs<span class="op">=</span>n_job,scoring<span class="op">=</span>scoring,refit<span class="op">=</span><span class="st">&#39;f1&#39;</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>models<span class="op">=</span>[(decision_tree,<span class="st">&#39;Arbre de décision&#39;</span>),(logit,<span class="st">&#39;Logistique&#39;</span>)]</span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="173">
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sav<span class="op">=</span>sc.all_calc(df_regroup,models,top_cv<span class="op">=</span><span class="va">True</span>,cols<span class="op">=</span>calc_col)</span></code></pre></div>
 </div>
 <section id="resultats-finaux-" class="cell markdown">
 <h1>Resultats finaux :</h1>
 </section>
-<div class="cell code">
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>[(<span class="st">&#39;Sans traitement</span><span class="ch">\n</span><span class="st">&#39;</span>,res_all),(<span class="st">&#39;Avec regroupement</span><span class="ch">\n</span><span class="st">&#39;</span>,res_reg),(<span class="st">&#39;Regroupement et tunning</span><span class="ch">\n</span><span class="st">&#39;</span>,sav)]</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>txt<span class="op">=</span><span class="st">&#39;&#39;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> res:</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i[<span class="dv">0</span>],sc.fancy_dico(i[<span class="dv">1</span>]),<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,<span class="st">&#39;#&#39;</span><span class="op">*</span><span class="dv">100</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    txt<span class="op">+=</span>i[<span class="dv">0</span>]<span class="op">+</span><span class="st">&#39; &#39;</span><span class="op">+</span>sc.fancy_dico(i[<span class="dv">1</span>])<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span><span class="op">+</span><span class="st">&#39;#&#39;</span><span class="op">*</span><span class="dv">100</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;output/finals_res.txt&#39;</span>,<span class="st">&#39;w&#39;</span>) <span class="im">as</span> f :</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    f.write(txt)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<div class="cell code" data-execution_count="174">
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>[(<span class="st">&#39;Sans traitement</span><span class="ch">\n</span><span class="st">&#39;</span>,res_all),(<span class="st">&#39;Avec regroupement</span><span class="ch">\n</span><span class="st">&#39;</span>,res_reg),(<span class="st">&#39;Regroupement et tunning</span><span class="ch">\n</span><span class="st">&#39;</span>,sav)]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>txt<span class="op">=</span><span class="st">&#39;&#39;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> res:</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i[<span class="dv">0</span>],<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,sc.fancy_dico(i[<span class="dv">1</span>]),<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,<span class="st">&#39;#&#39;</span><span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    txt<span class="op">+=</span>i[<span class="dv">0</span>]<span class="op">+</span><span class="st">&#39; &#39;</span><span class="op">+</span>sc.fancy_dico(i[<span class="dv">1</span>])<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span><span class="op">+</span><span class="st">&#39;#&#39;</span><span class="op">*</span><span class="dv">100</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;output/finals_res.txt&#39;</span>,<span class="st">&#39;w&#39;</span>) <span class="im">as</span> f :</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    f.write(txt)</span></code></pre></div>
 <div class="output stream stdout">
 <pre><code>Sans traitement
+ 
  Arbre de décision
-     accuracy : 0.62 
+     accuracy : 0.6 
      auc : 0.74 
-     Gauc : 0.53 
+     Gauc : 0.74 
      f1-score : 0.61 
 Logistique
-     accuracy : 0.7 
-     auc : 0.71 
-     Gauc : 0.72 
-     f1-score : 0.58 
+     accuracy : 0.58 
+     auc : 0.62 
+     Gauc : 0.8 
+     f1-score : 0.41 
  
  ####################################################################################################
 Avec regroupement
+ 
  Arbre de décision
-     accuracy : 0.67 
+     accuracy : 0.65 
      auc : 0.75 
-     Gauc : 0.65 
+     Gauc : 0.78 
      f1-score : 0.63 
 Logistique
-     accuracy : 0.69 
-     auc : 0.74 
-     Gauc : 0.76 
-     f1-score : 0.62 
+     accuracy : 0.72 
+     auc : 0.75 
+     Gauc : 0.89 
+     f1-score : 0.65 
  
  ####################################################################################################
 Regroupement et tunning
+ 
  Arbre de décision
      best params : {&#39;max_depth&#39;: 10, &#39;max_features&#39;: None, &#39;min_samples_leaf&#39;: 4, &#39;min_samples_split&#39;: 10} 
-     associed f1-score : {&#39;accuracy&#39;: 0.76, &#39;auc&#39;: 0.76, &#39;Gauc&#39;: 0.8, &#39;f1-score&#39;: 0.66} 
+     associed f1-score : {&#39;accuracy&#39;: 0.77, &#39;auc&#39;: 0.77, &#39;Gauc&#39;: 0.9, &#39;f1-score&#39;: 0.67} 
 Logistique
-     best params : {&#39;C&#39;: 10.0, &#39;penalty&#39;: &#39;l2&#39;, &#39;solver&#39;: &#39;lbfgs&#39;} 
-     associed f1-score : {&#39;accuracy&#39;: 0.69, &#39;auc&#39;: 0.74, &#39;Gauc&#39;: 0.76, &#39;f1-score&#39;: 0.62} 
+     best params : {&#39;C&#39;: 100.0, &#39;penalty&#39;: &#39;l2&#39;, &#39;solver&#39;: &#39;newton-cg&#39;} 
+     associed f1-score : {&#39;accuracy&#39;: 0.73, &#39;auc&#39;: 0.76, &#39;Gauc&#39;: 0.9, &#39;f1-score&#39;: 0.66} 
  
  ####################################################################################################
 </code></pre>
@@ -669,477 +621,294 @@ Logistique
 <section id="prediction-avec-la-nouvelle-data" class="cell markdown">
 <h1>PREDICTION AVEC LA NOUVELLE DATA</h1>
 </section>
-<div class="cell code">
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(sc)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>pd.read_csv(<span class="st">&#39;data/nouvelle_data.csv&#39;</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>df_newdata.drop(<span class="st">&#39;fnlwgt&#39;</span>,axis<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                           )</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;native-country&#39;</span>]<span class="op">=</span>df_newdata[<span class="st">&#39;native-country&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="st">&#39;USA&#39;</span> <span class="cf">if</span> x<span class="op">==</span><span class="st">&#39;United-States&#39;</span> <span class="cf">else</span> <span class="st">&#39;OTHER&#39;</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;capital-gain&#39;</span>]<span class="op">+=</span>df_newdata[<span class="st">&#39;capital-loss&#39;</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>df_newdata.drop(<span class="st">&#39;capital-loss&#39;</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>df_newdata.drop(df_newdata[df_newdata[<span class="st">&#39;workclass&#39;</span>]<span class="op">==</span><span class="st">&#39;Never-worked&#39;</span>].index) <span class="co">#Parce que nous avons supprimé tout ce qui avait des ?</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>sc.clean_df(df_newdata,sup_var)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    df_newdata<span class="op">=</span>sc.process_datacleaning(df_newdata,dico_regroup[i])</span></code></pre></div>
-</div>
-<div class="cell code" data-execution_count="276">
+<div class="cell code" data-execution_count="175">
 <div class="sourceCode" id="cb32"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>prediction<span class="op">=</span>sc.all_calc(df_regroup,new_data<span class="op">=</span>df_newdata,models<span class="op">=</span>models,cols<span class="op">=</span>calc_col)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>prediction</span></code></pre></div>
-<div class="output execute_result" data-execution_count="276">
-<pre><code>{&#39;Arbre de décision&#39;: [array([False, False,  True, ...,  True, False, False]),
+class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(sc)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>pd.read_csv(<span class="st">&#39;data/nouvelle_data.csv&#39;</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;native-country&#39;</span>]<span class="op">=</span>df_newdata[<span class="st">&#39;native-country&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="st">&#39;USA&#39;</span> <span class="cf">if</span> x<span class="op">==</span><span class="st">&#39;United-States&#39;</span> <span class="cf">else</span> <span class="st">&#39;OTHER&#39;</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;capital-gain&#39;</span>]<span class="op">+=</span>df_newdata[<span class="st">&#39;capital-loss&#39;</span>]<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>df_newdata.drop(<span class="st">&#39;capital-loss&#39;</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(df_newdata[df_newdata[<span class="st">&#39;workclass&#39;</span>]<span class="op">==</span><span class="st">&#39;Never-worked&#39;</span>]))</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(df_newdata[<span class="st">&#39;workclass&#39;</span>]))</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>df_newdata.drop(df_newdata[df_newdata[<span class="st">&#39;workclass&#39;</span>]<span class="op">==</span><span class="st">&#39;Never-worked&#39;</span>].index) <span class="co">#Parce que nous avons supprimé tout ce qui avait des ?</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>df_newdata<span class="op">=</span>sc.clean_df(df_newdata,sup_var)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    df_newdata<span class="op">=</span>sc.process_datacleaning(df_newdata,dico_regroup[i])</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>1066
+9681
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="176">
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>prediction<span class="op">=</span>sc.all_calc(df_regroup,new_data<span class="op">=</span>df_newdata,models<span class="op">=</span>models,cols<span class="op">=</span>calc_col)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>prediction</span></code></pre></div>
+<div class="output execute_result" data-execution_count="176">
+<pre><code>{&#39;Arbre de décision&#39;: [array([False, False, False, ..., False, False, False]),
   &#39;Arbre de décision&#39;],
- &#39;Logistique&#39;: [array([False, False,  True, ..., False, False, False]),
+ &#39;Logistique&#39;: [array([False, False, False, ..., False, False, False]),
   &#39;Logistique&#39;]}</code></pre>
 </div>
 </div>
-<div class="cell code" data-execution_count="277">
-<div class="sourceCode" id="cb34"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;Pred_Logit&#39;</span>]<span class="op">=</span>prediction[<span class="st">&#39;Logistique&#39;</span>][<span class="dv">0</span>]</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;Pred_Arbre&#39;</span>]<span class="op">=</span>prediction[<span class="st">&#39;Arbre de décision&#39;</span>][<span class="dv">0</span>]</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>df_newdata.to_csv(<span class="st">&#39;df_pred_newdata.csv&#39;</span>)</span></code></pre></div>
+<div class="cell code" data-execution_count="177">
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;Pred_Logit&#39;</span>]<span class="op">=</span>prediction[<span class="st">&#39;Logistique&#39;</span>][<span class="dv">0</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>df_newdata[<span class="st">&#39;Pred_Arbre&#39;</span>]<span class="op">=</span>prediction[<span class="st">&#39;Arbre de décision&#39;</span>][<span class="dv">0</span>]</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>df_newdata.to_csv(<span class="st">&#39;output/df_pred_newdata.csv&#39;</span>)</span></code></pre></div>
 </div>
-</body>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-<!--
-generated by Pygments <https://pygments.org/>
-Copyright 2006-2024 by the Pygments team.
-Licensed under the BSD license, see LICENSE for details.
--->
-<html>
-<head>
-  <title></title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <style type="text/css">
-/*
-generated by Pygments <https://pygments.org/>
-Copyright 2006-2024 by the Pygments team.
-Licensed under the BSD license, see LICENSE for details.
-*/
-pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-body .hll { background-color: #ffffcc }
-body { background: #f8f8f8; }
-body .c { color: #3D7B7B; font-style: italic } /* Comment */
-body .err { border: 1px solid #FF0000 } /* Error */
-body .k { color: #008000; font-weight: bold } /* Keyword */
-body .o { color: #666666 } /* Operator */
-body .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
-body .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
-body .cp { color: #9C6500 } /* Comment.Preproc */
-body .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
-body .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
-body .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
-body .gd { color: #A00000 } /* Generic.Deleted */
-body .ge { font-style: italic } /* Generic.Emph */
-body .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
-body .gr { color: #E40000 } /* Generic.Error */
-body .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-body .gi { color: #008400 } /* Generic.Inserted */
-body .go { color: #717171 } /* Generic.Output */
-body .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-body .gs { font-weight: bold } /* Generic.Strong */
-body .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-body .gt { color: #0044DD } /* Generic.Traceback */
-body .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-body .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-body .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-body .kp { color: #008000 } /* Keyword.Pseudo */
-body .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-body .kt { color: #B00040 } /* Keyword.Type */
-body .m { color: #666666 } /* Literal.Number */
-body .s { color: #BA2121 } /* Literal.String */
-body .na { color: #687822 } /* Name.Attribute */
-body .nb { color: #008000 } /* Name.Builtin */
-body .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-body .no { color: #880000 } /* Name.Constant */
-body .nd { color: #AA22FF } /* Name.Decorator */
-body .ni { color: #717171; font-weight: bold } /* Name.Entity */
-body .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
-body .nf { color: #0000FF } /* Name.Function */
-body .nl { color: #767600 } /* Name.Label */
-body .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-body .nt { color: #008000; font-weight: bold } /* Name.Tag */
-body .nv { color: #19177C } /* Name.Variable */
-body .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-body .w { color: #bbbbbb } /* Text.Whitespace */
-body .mb { color: #666666 } /* Literal.Number.Bin */
-body .mf { color: #666666 } /* Literal.Number.Float */
-body .mh { color: #666666 } /* Literal.Number.Hex */
-body .mi { color: #666666 } /* Literal.Number.Integer */
-body .mo { color: #666666 } /* Literal.Number.Oct */
-body .sa { color: #BA2121 } /* Literal.String.Affix */
-body .sb { color: #BA2121 } /* Literal.String.Backtick */
-body .sc { color: #BA2121 } /* Literal.String.Char */
-body .dl { color: #BA2121 } /* Literal.String.Delimiter */
-body .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-body .s2 { color: #BA2121 } /* Literal.String.Double */
-body .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
-body .sh { color: #BA2121 } /* Literal.String.Heredoc */
-body .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
-body .sx { color: #008000 } /* Literal.String.Other */
-body .sr { color: #A45A77 } /* Literal.String.Regex */
-body .s1 { color: #BA2121 } /* Literal.String.Single */
-body .ss { color: #19177C } /* Literal.String.Symbol */
-body .bp { color: #008000 } /* Name.Builtin.Pseudo */
-body .fm { color: #0000FF } /* Name.Function.Magic */
-body .vc { color: #19177C } /* Name.Variable.Class */
-body .vg { color: #19177C } /* Name.Variable.Global */
-body .vi { color: #19177C } /* Name.Variable.Instance */
-body .vm { color: #19177C } /* Name.Variable.Magic */
-body .il { color: #666666 } /* Literal.Number.Integer.Long */
+<div class="cell code" data-execution_count="178">
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Prediction logistique :&#39;</span>,df_newdata[<span class="st">&#39;Pred_Logit&#39;</span>].value_counts()<span class="op">/</span><span class="bu">sum</span>(df_newdata[<span class="st">&#39;Pred_Logit&#39;</span>].value_counts()),<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Prediction arbre :&#39;</span>,df_newdata[<span class="st">&#39;Pred_Arbre&#39;</span>].value_counts()<span class="op">/</span><span class="bu">sum</span>(df_newdata[<span class="st">&#39;Pred_Arbre&#39;</span>].value_counts()),<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Données réelle :&#39;</span>,df_regroup[<span class="st">&#39;income&#39;</span>].value_counts()<span class="op">/</span><span class="bu">sum</span>(df_regroup[<span class="st">&#39;income&#39;</span>].value_counts()),<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>      )</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Prediction logistique : Pred_Logit
+False    0.853652
+True     0.146348
+Name: count, dtype: float64 
+ Prediction arbre : Pred_Arbre
+False    0.774262
+True     0.225738
+Name: count, dtype: float64 
+ Données réelle : income
+&lt;=50K    0.751874
+&gt;50K     0.248126
+Name: count, dtype: float64 
 
-  </style>
-</head>
-<body>
-<h2></h2>
+</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="179">
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(confusion_matrix(df_newdata.Pred_Logit,df_newdata.Pred_Arbre))</span></code></pre></div>
+<div class="output execute_result" data-execution_count="179">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1">############ Modules importés</span>
-<span class="c1">################################################################################################################################################</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
-
-<span class="c1">################################################################################################################################################</span>
-<span class="c1">############ FONCTION POUR CALCULE ET PREDICTION DES MODELES</span>
-<span class="c1">################################################################################################################################################</span>
-
-<span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Affichage des metrics</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;accuracy&#39;</span> <span class="p">:</span>        <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))),</span><span class="mi">2</span><span class="p">),</span>
-                   <span class="s1">&#39;auc&#39;</span> <span class="p">:</span>      <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))),</span><span class="mi">2</span><span class="p">),</span>
-                   <span class="s1">&#39;Gauc&#39;</span> <span class="p">:</span>      <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span>
-                   <span class="s1">&#39;f1-score&#39;</span> <span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))),</span><span class="mi">2</span><span class="p">)}</span>
-
-<span class="k">def</span> <span class="nf">score_cv</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">trained_model</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;best params&#39;</span><span class="p">:</span> <span class="n">trained_model</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span>
-            <span class="s1">&#39;associed f1-score&#39;</span><span class="p">:</span> <span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">trained_model</span><span class="p">)}</span>
-
-<span class="k">def</span> <span class="nf">all_calc</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
-             <span class="n">models</span><span class="o">=</span><span class="p">[(</span><span class="n">DecisionTreeClassifier</span><span class="p">(),</span><span class="s1">&#39;Arbre de décision&#39;</span><span class="p">),(</span><span class="n">LogisticRegression</span><span class="p">(),</span><span class="s1">&#39;Logistique&#39;</span><span class="p">)],</span>
-             <span class="n">top_cv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-             <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
-             <span class="n">rnd_state</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
-             <span class="n">new_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-             <span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;workclass&#39;</span><span class="p">,</span> <span class="s1">&#39;education&#39;</span><span class="p">,</span> <span class="s1">&#39;marital-status&#39;</span><span class="p">,</span> <span class="s1">&#39;occupation&#39;</span><span class="p">,</span><span class="s1">&#39;relationship&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span><span class="s1">&#39;native-country&#39;</span><span class="p">,</span> <span class="s1">&#39;income&#39;</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Segmente le jeu de données en train test size si besoin</span>
-<span class="sd">    puis peut faire les predictions ou les scores dépendamment du besoin</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
-    <span class="n">X</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;income_&gt;50K&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">new_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="n">rnd_state</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">ret</span><span class="o">=</span><span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
-        <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">new_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">top_cv</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
-                <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span><span class="n">score_cv</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">new_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-    <span class="k">return</span> <span class="n">ret</span>
-
-<span class="c1">################################################################################################################################################</span>
-<span class="c1">############ FONCTION POUR TRAITEMENT DE DONNEES</span>
-<span class="c1">################################################################################################################################################</span>
-
-<span class="k">def</span> <span class="nf">randint_exc</span><span class="p">(</span><span class="n">liste</span><span class="p">,</span> <span class="n">exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Permet de faire un choix aléatoire dans une liste mis é part exception</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">res</span> <span class="o">==</span> <span class="n">exception</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">res</span>
-
-<span class="k">def</span> <span class="nf">repartition</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">interest</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Permet de savoir les modalitées é regrouper</span>
-<span class="sd">    Puis calcule la répartition de chaques modalitées dépendamment de la variable expliquée pour la regle de decision</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">a_reg</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
-        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span>   <span class="mf">0.05</span><span class="p">:</span> <span class="c1"># Si la modalité est inférieur au seuil</span>
-            <span class="n">a_reg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="c1">#On la met dans notre liste de modalités é regrouper</span>
-    <span class="n">cache</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">interest</span><span class="p">[</span><span class="mi">0</span><span class="p">]])[</span><span class="n">interest</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="c1"># On calcule la répartition de chaques modalités dépendamment de la variable expliquée</span>
-    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-        <span class="n">cache</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">ii</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># On divise par son nombre pour avoir une proportion et pr pouvoir comparer</span>
-    <span class="k">return</span> <span class="n">cache</span><span class="p">,</span><span class="n">a_reg</span>
-
-<span class="k">def</span> <span class="nf">regroupement</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">sup</span><span class="p">,</span> <span class="n">interest</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonction permettant de construire les dictionnaires de regroupement de variables é l&#39;aide de la régle de décision suivante:</span>
-<span class="sd">        regroupe une variable sous le seuil de rareté 0.05 avec</span>
-<span class="sd">        la variable ayant la répartition la plus semblable dépendamment</span>
-<span class="sd">        de la variable expliquée</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">regroup</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sup</span><span class="p">:</span>
-            <span class="n">cache</span><span class="p">,</span><span class="n">a_reg</span><span class="o">=</span><span class="n">repartition</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">interest</span><span class="p">)</span>
-            <span class="n">reg</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">sav</span> <span class="ow">in</span> <span class="n">a_reg</span><span class="p">:</span>
-                <span class="n">val</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="n">sav</span><span class="p">]</span>
-                <span class="n">savsav</span> <span class="o">=</span> <span class="n">randint_exc</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span><span class="n">sav</span><span class="p">)</span> <span class="c1">#Ici on choisi une modalité au hasard pour initialiser le minimum (on exlu la modalité analysée)</span>
-                <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="n">m</span><span class="p">])</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="n">savsav</span><span class="p">])</span> <span class="ow">and</span> <span class="n">sav</span><span class="o">!=</span><span class="n">m</span><span class="p">:</span> <span class="c1">#ici regle de décision</span>
-                        <span class="n">savsav</span> <span class="o">=</span> <span class="n">m</span>
-                <span class="n">reg</span><span class="p">[</span><span class="n">sav</span><span class="p">]</span> <span class="o">=</span> <span class="n">savsav</span>
-            <span class="n">regroup</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span>
-    <span class="k">return</span> <span class="n">regroup</span>
-
-<span class="k">def</span> <span class="nf">regroupement_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">dico</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    permet de faire le regroupement</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">dico</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">kk</span><span class="p">,</span><span class="n">vv</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">kk</span><span class="p">,</span><span class="n">vv</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
-
-<span class="k">def</span> <span class="nf">clean_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">too_much</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    fonction permettant de clean le dataset, supprimer les colonnes non voulues... etc</span>
-<span class="sd">    c&#39;est ici qu&#39;on fait le choix de supprimer toutes les personnes ne travaillant pas</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">too_much</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">process_datacleaning</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">dico</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    permet de faire le regroupement de variables en une fonction et en répétant le replace au cas ou</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df_reg</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="c1">#df_reg=clean_df(df_reg,sup_var)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-        <span class="n">df_reg</span><span class="o">=</span><span class="n">regroupement_dataframe</span><span class="p">(</span><span class="n">df_reg</span><span class="p">,</span><span class="n">dico</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df_reg</span>
-
-<span class="c1">################################################################################################################################################</span>
-<span class="c1">############ FONCTION POUR REPRESENTATION DE VARIABLES</span>
-<span class="c1">################################################################################################################################################</span>
-
-<span class="k">def</span> <span class="nf">show_repartition</span><span class="p">(</span><span class="n">df_regroup</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Montre la répartition des individus dans les modalités de chaque variable</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df_regroup</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-        <span class="n">col</span><span class="o">=</span><span class="n">i</span>
-        <span class="n">index</span><span class="o">=</span> <span class="n">df_regroup</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
-        <span class="n">values</span><span class="o">=</span><span class="n">df_regroup</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">values</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_regroup</span><span class="p">)</span><span class="o">*</span><span class="mf">0.05</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">fancy_dico</span><span class="p">(</span><span class="n">dico</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonction pour rendre plus compréhensible la lecture des dictionnaires</span>
-<span class="sd">    de dictionnaires ou les listes de dictionnaires de dictionnaitres</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rep</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">dico</span><span class="p">)</span><span class="o">==</span><span class="nb">list</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">dicoco</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dico</span><span class="p">)):</span>
-            <span class="n">rep</span><span class="o">+=</span><span class="sa">f</span><span class="s2">&quot;Itération numéro </span><span class="si">{</span><span class="n">dicoco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">values</span> <span class="ow">in</span> <span class="n">dico</span><span class="p">[</span><span class="n">dicoco</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">rep</span><span class="o">+=</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-                <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">rep</span><span class="o">+=</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1"> &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">values</span> <span class="ow">in</span> <span class="n">dico</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">rep</span><span class="o">+=</span><span class="n">key</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">rep</span><span class="o">+=</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1"> &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="k">return</span> <span class="n">rep</span>
-</pre></div></td></tr></table></div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5090</td>
+      <td>953</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>391</td>
+      <td>645</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="scoringpy" class="cell markdown">
+<h1>Scoring.py</h1>
+</section>
+<div class="cell code" data-execution_count="180">
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">############ Modules importés</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> plot_tree</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="co">############ FONCTION POUR CALCULE ET PREDICTION DES MODELES</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> score(X_train,X_test,y_train,y_test,model):</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="co">    Affichage des metrics</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;accuracy&#39;</span> :        <span class="bu">round</span>(<span class="bu">float</span>(metrics.precision_score(y_test,model.predict(X_test))),<span class="dv">2</span>),</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;auc&#39;</span> :      <span class="bu">round</span>(<span class="bu">float</span>(metrics.roc_auc_score(y_test,model.predict(X_test))),<span class="dv">2</span>),</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;Gauc&#39;</span> :      <span class="bu">round</span>(<span class="bu">float</span>(metrics.roc_auc_score(y_test,model.predict_proba(X_test)[:,<span class="dv">1</span>], average<span class="op">=</span><span class="st">&#39;weighted&#39;</span>)),<span class="dv">2</span>),</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;f1-score&#39;</span> : <span class="bu">round</span>(<span class="bu">float</span>(metrics.f1_score(y_test,model.predict(X_test))),<span class="dv">2</span>)}</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> score_cv(X_train,X_test,y_train,y_test,trained_model):</span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">&#39;best params&#39;</span>: trained_model.best_params_,</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;associed f1-score&#39;</span>: score(X_train,X_test,y_train,y_test,trained_model)}</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> all_calc(df,</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>             models<span class="op">=</span>[(DecisionTreeClassifier(),<span class="st">&#39;Arbre de décision&#39;</span>),(LogisticRegression(),<span class="st">&#39;Logistique&#39;</span>)],</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>             top_cv<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>             test_size<span class="op">=</span><span class="fl">0.33</span>,</span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>             rnd_state<span class="op">=</span><span class="dv">11</span>,</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>             new_data<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>             cols<span class="op">=</span>[<span class="st">&#39;workclass&#39;</span>, <span class="st">&#39;education&#39;</span>, <span class="st">&#39;marital-status&#39;</span>, <span class="st">&#39;occupation&#39;</span>,<span class="st">&#39;relationship&#39;</span>, <span class="st">&#39;race&#39;</span>, <span class="st">&#39;gender&#39;</span>,<span class="st">&#39;native-country&#39;</span>, <span class="st">&#39;income&#39;</span>],</span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>             plot<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="co">    Segmente le jeu de données en train test size si besoin</span></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a><span class="co">    puis peut faire les predictions ou les scores dépendamment du besoin</span></span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>pd.get_dummies(df,columns<span class="op">=</span>cols)</span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>df[df.columns[:<span class="op">-</span><span class="dv">2</span>]]</span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">&#39;income_&gt;50K&#39;</span>]</span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> new_data <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>        X_train, X_test, y_train, y_test <span class="op">=</span>train_test_split(X,y,test_size<span class="op">=</span>test_size,random_state<span class="op">=</span>rnd_state)</span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>        X_train,y_train<span class="op">=</span>(X,y)</span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a>    ret<span class="op">=</span>{}</span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> models:</span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>        i[<span class="dv">0</span>].fit(X_train,y_train)</span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> new_data <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> top_cv<span class="op">==</span><span class="va">True</span>:</span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>                ret[i[<span class="dv">1</span>]]<span class="op">=</span>score_cv(X_train,X_test,y_train,y_test,i[<span class="dv">0</span>])</span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a>                ret[i[<span class="dv">1</span>]]<span class="op">=</span>score(X_train,X_test,y_train,y_test,i[<span class="dv">0</span>])</span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> new_data <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a>            ret[i[<span class="dv">1</span>]]<span class="op">=</span>[i[<span class="dv">0</span>].predict(pd.get_dummies(new_data,columns<span class="op">=</span>cols[:<span class="op">-</span><span class="dv">1</span>])),i[<span class="dv">1</span>]]</span>
+<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> plot <span class="op">==</span> <span class="va">True</span> <span class="kw">and</span> i[<span class="dv">1</span>]<span class="op">==</span><span class="st">&#39;Arbre de décision&#39;</span>:</span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a>            plot_tree(i[<span class="dv">0</span>])</span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ret</span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a><span class="co">############ FONCTION POUR TRAITEMENT DE DONNEES</span></span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> randint_exc(liste, exception):</span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a><span class="co">    Permet de faire un choix aléatoire dans une liste mis à part exception</span></span>
+<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> random.choice(liste)</span>
+<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> res <span class="op">==</span> exception:</span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> random.choice(liste)</span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res</span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> repartition(df,i,interest):</span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a><span class="co">    Permet de savoir les modalitées à regrouper</span></span>
+<span id="cb40-84"><a href="#cb40-84" aria-hidden="true" tabindex="-1"></a><span class="co">    Puis calcule la répartition de chaques modalitées dépendamment de la variable expliquée pour la regle de decision</span></span>
+<span id="cb40-85"><a href="#cb40-85" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-86"><a href="#cb40-86" aria-hidden="true" tabindex="-1"></a>    a_reg <span class="op">=</span> []</span>
+<span id="cb40-87"><a href="#cb40-87" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> df[i].unique():</span>
+<span id="cb40-88"><a href="#cb40-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">sum</span>(df[i] <span class="op">==</span> m)<span class="op">/</span><span class="bu">len</span>(df[i]) <span class="op">&lt;</span>   <span class="fl">0.05</span>: <span class="co"># Si la modalité est inférieur au seuil</span></span>
+<span id="cb40-89"><a href="#cb40-89" aria-hidden="true" tabindex="-1"></a>            a_reg.append(m) <span class="co">#On la met dans notre liste de modalités à regrouper</span></span>
+<span id="cb40-90"><a href="#cb40-90" aria-hidden="true" tabindex="-1"></a>    cache <span class="op">=</span> pd.crosstab(df[i], df[interest[<span class="dv">0</span>]])[interest[<span class="dv">1</span>]]<span class="co"># On calcule la répartition de chaques modalités dépendamment de la variable expliquée</span></span>
+<span id="cb40-91"><a href="#cb40-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ii <span class="kw">in</span> cache.index:</span>
+<span id="cb40-92"><a href="#cb40-92" aria-hidden="true" tabindex="-1"></a>        cache[ii] <span class="op">=</span> <span class="bu">round</span>(cache[ii] <span class="op">/</span> <span class="bu">sum</span>(df[i] <span class="op">==</span> ii), <span class="dv">3</span>) <span class="co"># On divise par son nombre pour avoir une proportion et pr pouvoir comparer</span></span>
+<span id="cb40-93"><a href="#cb40-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cache,a_reg</span>
+<span id="cb40-94"><a href="#cb40-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-95"><a href="#cb40-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-96"><a href="#cb40-96" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regroupement(df, sup, interest):</span>
+<span id="cb40-97"><a href="#cb40-97" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-98"><a href="#cb40-98" aria-hidden="true" tabindex="-1"></a><span class="co">    Fonction permettant de construire les dictionnaires de regroupement de variables à l&#39;aide de la règle de décision suivante:</span></span>
+<span id="cb40-99"><a href="#cb40-99" aria-hidden="true" tabindex="-1"></a><span class="co">        regroupe une variable sous le seuil de rareté 0.05 avec </span></span>
+<span id="cb40-100"><a href="#cb40-100" aria-hidden="true" tabindex="-1"></a><span class="co">        la variable ayant la répartition la plus semblable dépendamment </span></span>
+<span id="cb40-101"><a href="#cb40-101" aria-hidden="true" tabindex="-1"></a><span class="co">        de la variable expliquée</span></span>
+<span id="cb40-102"><a href="#cb40-102" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-103"><a href="#cb40-103" aria-hidden="true" tabindex="-1"></a>    regroup <span class="op">=</span> {}</span>
+<span id="cb40-104"><a href="#cb40-104" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> df.columns:</span>
+<span id="cb40-105"><a href="#cb40-105" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> sup:</span>
+<span id="cb40-106"><a href="#cb40-106" aria-hidden="true" tabindex="-1"></a>            cache,a_reg<span class="op">=</span>repartition(df,i,interest)</span>
+<span id="cb40-107"><a href="#cb40-107" aria-hidden="true" tabindex="-1"></a>            reg <span class="op">=</span> {}</span>
+<span id="cb40-108"><a href="#cb40-108" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> sav <span class="kw">in</span> a_reg:</span>
+<span id="cb40-109"><a href="#cb40-109" aria-hidden="true" tabindex="-1"></a>                val <span class="op">=</span> cache[sav]</span>
+<span id="cb40-110"><a href="#cb40-110" aria-hidden="true" tabindex="-1"></a>                savsav <span class="op">=</span> randint_exc(df[i].unique(),sav) <span class="co">#Ici on choisi une modalité au hasard pour initialiser le minimum (on exlu la modalité analysée)</span></span>
+<span id="cb40-111"><a href="#cb40-111" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> m <span class="kw">in</span> cache.index:</span>
+<span id="cb40-112"><a href="#cb40-112" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> <span class="bu">abs</span>(val <span class="op">-</span> cache[m]) <span class="op">&lt;</span> <span class="bu">abs</span>(val <span class="op">-</span> cache[savsav]) <span class="kw">and</span> sav<span class="op">!=</span>m: <span class="co">#ici regle de décision</span></span>
+<span id="cb40-113"><a href="#cb40-113" aria-hidden="true" tabindex="-1"></a>                        savsav <span class="op">=</span> m</span>
+<span id="cb40-114"><a href="#cb40-114" aria-hidden="true" tabindex="-1"></a>                reg[sav] <span class="op">=</span> savsav</span>
+<span id="cb40-115"><a href="#cb40-115" aria-hidden="true" tabindex="-1"></a>            regroup[i] <span class="op">=</span> reg</span>
+<span id="cb40-116"><a href="#cb40-116" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> regroup</span>
+<span id="cb40-117"><a href="#cb40-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-118"><a href="#cb40-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-119"><a href="#cb40-119" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regroupement_dataframe(df,dico):</span>
+<span id="cb40-120"><a href="#cb40-120" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-121"><a href="#cb40-121" aria-hidden="true" tabindex="-1"></a><span class="co">    permet de faire le regroupement</span></span>
+<span id="cb40-122"><a href="#cb40-122" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-123"><a href="#cb40-123" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k,v <span class="kw">in</span> dico.items():</span>
+<span id="cb40-124"><a href="#cb40-124" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> kk,vv <span class="kw">in</span> v.items():</span>
+<span id="cb40-125"><a href="#cb40-125" aria-hidden="true" tabindex="-1"></a>            df[k]<span class="op">=</span>df[k].replace(kk,vv)</span>
+<span id="cb40-126"><a href="#cb40-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb40-127"><a href="#cb40-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-128"><a href="#cb40-128" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_df(df,too_much):</span>
+<span id="cb40-129"><a href="#cb40-129" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-130"><a href="#cb40-130" aria-hidden="true" tabindex="-1"></a><span class="co">    fonction permettant de clean le dataset, supprimer les colonnes non voulues... etc</span></span>
+<span id="cb40-131"><a href="#cb40-131" aria-hidden="true" tabindex="-1"></a><span class="co">    c&#39;est ici qu&#39;on fait le choix de supprimer toutes les personnes ne travaillant pas</span></span>
+<span id="cb40-132"><a href="#cb40-132" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-133"><a href="#cb40-133" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df.replace(<span class="st">&#39;?&#39;</span>, np.nan).dropna().reset_index(drop<span class="op">=</span><span class="va">True</span>).drop(too_much, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb40-134"><a href="#cb40-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-135"><a href="#cb40-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-136"><a href="#cb40-136" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_datacleaning(df,dico):</span>
+<span id="cb40-137"><a href="#cb40-137" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-138"><a href="#cb40-138" aria-hidden="true" tabindex="-1"></a><span class="co">    permet de faire le regroupement de variables en une fonction et en répétant le replace au cas ou</span></span>
+<span id="cb40-139"><a href="#cb40-139" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-140"><a href="#cb40-140" aria-hidden="true" tabindex="-1"></a>    df_reg<span class="op">=</span>df.copy()</span>
+<span id="cb40-141"><a href="#cb40-141" aria-hidden="true" tabindex="-1"></a>    <span class="co">#df_reg=clean_df(df_reg,sup_var)</span></span>
+<span id="cb40-142"><a href="#cb40-142" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
+<span id="cb40-143"><a href="#cb40-143" aria-hidden="true" tabindex="-1"></a>        df_reg<span class="op">=</span>regroupement_dataframe(df_reg,dico)</span>
+<span id="cb40-144"><a href="#cb40-144" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_reg</span>
+<span id="cb40-145"><a href="#cb40-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-146"><a href="#cb40-146" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-147"><a href="#cb40-147" aria-hidden="true" tabindex="-1"></a><span class="co">############ FONCTION POUR REPRESENTATION DE VARIABLES</span></span>
+<span id="cb40-148"><a href="#cb40-148" aria-hidden="true" tabindex="-1"></a><span class="co">################################################################################################################################################</span></span>
+<span id="cb40-149"><a href="#cb40-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-150"><a href="#cb40-150" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_repartition(df_regroup):</span>
+<span id="cb40-151"><a href="#cb40-151" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-152"><a href="#cb40-152" aria-hidden="true" tabindex="-1"></a><span class="co">    Montre la répartition des individus dans les modalités de chaque variable</span></span>
+<span id="cb40-153"><a href="#cb40-153" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-154"><a href="#cb40-154" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> df_regroup.columns:</span>
+<span id="cb40-155"><a href="#cb40-155" aria-hidden="true" tabindex="-1"></a>        col<span class="op">=</span>i</span>
+<span id="cb40-156"><a href="#cb40-156" aria-hidden="true" tabindex="-1"></a>        index<span class="op">=</span> df_regroup[col].value_counts().index</span>
+<span id="cb40-157"><a href="#cb40-157" aria-hidden="true" tabindex="-1"></a>        values<span class="op">=</span>df_regroup[col].value_counts()</span>
+<span id="cb40-158"><a href="#cb40-158" aria-hidden="true" tabindex="-1"></a>        plt.bar(index,values)</span>
+<span id="cb40-159"><a href="#cb40-159" aria-hidden="true" tabindex="-1"></a>        plt.axhline(<span class="bu">len</span>(df_regroup)<span class="op">*</span><span class="fl">0.05</span>,color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb40-160"><a href="#cb40-160" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb40-161"><a href="#cb40-161" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
+<span id="cb40-162"><a href="#cb40-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-163"><a href="#cb40-163" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fancy_dico(dico):</span>
+<span id="cb40-164"><a href="#cb40-164" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-165"><a href="#cb40-165" aria-hidden="true" tabindex="-1"></a><span class="co">    Fonction pour rendre plus compréhensible la lecture des dictionnaires </span></span>
+<span id="cb40-166"><a href="#cb40-166" aria-hidden="true" tabindex="-1"></a><span class="co">    de dictionnaires ou les listes de dictionnaires de dictionnaitres</span></span>
+<span id="cb40-167"><a href="#cb40-167" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb40-168"><a href="#cb40-168" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">=</span><span class="st">&#39;&#39;</span></span>
+<span id="cb40-169"><a href="#cb40-169" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">type</span>(dico)<span class="op">==</span><span class="bu">list</span>:</span>
+<span id="cb40-170"><a href="#cb40-170" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> dicoco <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(dico)):</span>
+<span id="cb40-171"><a href="#cb40-171" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">+=</span><span class="ss">f&quot;Itération numéro </span><span class="sc">{</span>dicoco <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">&quot;</span> <span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span></span>
+<span id="cb40-172"><a href="#cb40-172" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> key,values <span class="kw">in</span> dico[dicoco].items():</span>
+<span id="cb40-173"><a href="#cb40-173" aria-hidden="true" tabindex="-1"></a>                rep<span class="op">+=</span><span class="st">&#39; &#39;</span><span class="op">*</span><span class="dv">5</span><span class="op">+</span>key<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span></span>
+<span id="cb40-174"><a href="#cb40-174" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> key,value <span class="kw">in</span> values.items():</span>
+<span id="cb40-175"><a href="#cb40-175" aria-hidden="true" tabindex="-1"></a>                    rep<span class="op">+=</span><span class="st">&#39; &#39;</span><span class="op">*</span><span class="dv">10</span><span class="op">+</span><span class="ss">f&#39;</span><span class="sc">{</span>key<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss"> &#39;</span><span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span></span>
+<span id="cb40-176"><a href="#cb40-176" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb40-177"><a href="#cb40-177" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> key,values <span class="kw">in</span> dico.items():</span>
+<span id="cb40-178"><a href="#cb40-178" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">+=</span>key<span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span></span>
+<span id="cb40-179"><a href="#cb40-179" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> key,value <span class="kw">in</span> values.items():</span>
+<span id="cb40-180"><a href="#cb40-180" aria-hidden="true" tabindex="-1"></a>                rep<span class="op">+=</span><span class="st">&#39; &#39;</span><span class="op">*</span><span class="dv">5</span><span class="op">+</span><span class="ss">f&#39;</span><span class="sc">{</span>key<span class="sc">}</span><span class="ss"> : </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss"> &#39;</span><span class="op">+</span><span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span></span>
+<span id="cb40-181"><a href="#cb40-181" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rep</span></code></pre></div>
+</div>
 </body>
 </html>

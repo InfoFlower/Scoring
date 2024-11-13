@@ -1,33 +1,33 @@
 Sans traitement
  Arbre de décision
-     accuracy : 0.62 
+     accuracy : 0.6 
      auc : 0.74 
-     Gauc : 0.53 
+     Gauc : 0.74 
      f1-score : 0.61 
 Logistique
-     accuracy : 0.7 
-     auc : 0.71 
-     Gauc : 0.72 
-     f1-score : 0.58 
+     accuracy : 0.58 
+     auc : 0.62 
+     Gauc : 0.8 
+     f1-score : 0.41 
 
 ####################################################################################################Avec regroupement
  Arbre de décision
-     accuracy : 0.67 
+     accuracy : 0.65 
      auc : 0.75 
-     Gauc : 0.65 
+     Gauc : 0.78 
      f1-score : 0.63 
 Logistique
-     accuracy : 0.69 
-     auc : 0.74 
-     Gauc : 0.76 
-     f1-score : 0.62 
+     accuracy : 0.72 
+     auc : 0.75 
+     Gauc : 0.89 
+     f1-score : 0.65 
 
 ####################################################################################################Regroupement et tunning
  Arbre de décision
      best params : {'max_depth': 10, 'max_features': None, 'min_samples_leaf': 4, 'min_samples_split': 10} 
-     associed f1-score : {'accuracy': 0.76, 'auc': 0.76, 'Gauc': 0.8, 'f1-score': 0.66} 
+     associed f1-score : {'accuracy': 0.77, 'auc': 0.77, 'Gauc': 0.9, 'f1-score': 0.67} 
 Logistique
-     best params : {'C': 10.0, 'penalty': 'l2', 'solver': 'lbfgs'} 
-     associed f1-score : {'accuracy': 0.69, 'auc': 0.74, 'Gauc': 0.76, 'f1-score': 0.62} 
+     best params : {'C': 100.0, 'penalty': 'l2', 'solver': 'newton-cg'} 
+     associed f1-score : {'accuracy': 0.73, 'auc': 0.76, 'Gauc': 0.9, 'f1-score': 0.66} 
 
 ####################################################################################################
